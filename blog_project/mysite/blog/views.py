@@ -1,7 +1,6 @@
 from django.contrib.auth import login
 from django.shortcuts import render,get_object_or_404,redirect
 from django.utils import timezone
-from blog_project.mysite.blog.forms import PostForm
 from django.shortcuts import render
 from blog.models import Post,Comment
 from blog.forms import PostForm,CommentForm
@@ -20,7 +19,7 @@ class AboutView(TemplateView):
 class PostListView(ListView):
     model = Post
 
-    def get_querysett(self):
+    def get_queryset(self):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
 
@@ -28,7 +27,7 @@ class PostDetailView(DetailView):
     model = Post
 
  
-class CreateView(LoginRequiredMixin,CreateView):
+class CreatePostView(LoginRequiredMixin,CreateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
 
@@ -59,10 +58,10 @@ class DraftListView(LoginRequiredMixin,ListView):
 
 ################
 @login_required
-def post_publish(request,pk):
-    post = get_object_or_404(Post,pk=pk)
-    post.publish
-    return redirect('post_detail',pk=pk)
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('post_detail', pk=pk)
 
 
 
