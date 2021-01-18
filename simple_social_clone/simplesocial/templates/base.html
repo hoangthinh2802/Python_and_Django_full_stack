@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +19,6 @@
 
      {# Custom CSS#}
      <link rel="stylesheet" href="{% static 'simplesocial/css/master.css' %}">
-
      {# Fonts#}
      <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
 </head>
@@ -30,7 +31,7 @@
                     <li><a href="">Post</a></li>
                     <li><a href="">Groups</a></li>
                     <li><a href="">Create Group</a></li>
-                    <li><a href="{% url 'accounts:logout' %}"></a></li>
+                    <li><a href="{% url 'accounts:logout' %}">Log Out</a></li>
                 {% else %}
                     <li><a href="">Groups</a></li>
                     <li><a href="{% url 'accounts:login' %}">Log In</a></li>
